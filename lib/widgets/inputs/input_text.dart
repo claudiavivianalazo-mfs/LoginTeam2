@@ -9,7 +9,6 @@ class InputText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
-        margin: const EdgeInsets.all(10),
         child: TextFormField(
           style: const TextStyle(
             height: 0.3,
