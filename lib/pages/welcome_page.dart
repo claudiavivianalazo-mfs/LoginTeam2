@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../widgets/dropdown_button_img_txt.dart';
 import '../widgets/background_tigo.dart';
 import '../widgets/button_styles.dart';
