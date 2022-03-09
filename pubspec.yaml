@@ -17,8 +17,8 @@ dependencies:
   encrypt: ^5.0.1
   auth0:
     git:
-      # url: https://github.com/Millicom-MFS/AuthModule-Mobile
-      url: git@github.com:Millicom-MFS/AuthModule-Mobile
+      url: https://github.com/Millicom-MFS/AuthModule-Mobile
+      #url: git@github.com:Millicom-MFS/AuthModule-Mobile
 
 dev_dependencies:
   flutter_test:
