@@ -40,7 +40,7 @@ class LoginTigo extends State<LoginPage> {
         _email.text = _emailVar;
         _password.text = _passwordVar;
       } else {
-        await _prefs.clear();
+        //await _prefs.clear();
         setState(() {
           _email.clear();
           _password.clear();
