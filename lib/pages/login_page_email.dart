@@ -1,14 +1,9 @@
 import 'package:flutter/material.dart';
 import '../widgets/login_scaffold.dart';
 
-class LoginPageEmail extends StatefulWidget {
+class LoginPageEmail extends StatelessWidget {
   const LoginPageEmail({Key? key}) : super(key: key);
 
-  @override
-  State<LoginPageEmail> createState() => _LoginPageEmailState();
-}
-
-class _LoginPageEmailState extends State<LoginPageEmail> {
   @override
   Widget build(BuildContext context) {
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
