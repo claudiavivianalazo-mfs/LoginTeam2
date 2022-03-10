@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_modular/flutter_modular.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/dropdown_button_img_txt.dart';
 import '../widgets/background_tigo.dart';
 import '../widgets/button_styles.dart';
@@ -22,6 +23,7 @@ class WelcomePage extends StatelessWidget {
               ),
             ),
           ),
+          //SvgPicture.asset('assets/images/Group_1964.svg', fit: BoxFit.contain),
           Container(
             margin: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
             width: 70,

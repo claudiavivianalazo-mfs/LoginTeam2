@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 import '../models/country.dart';
 
@@ -12,6 +13,22 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
   Country _selectedCountry =
       Country(name: "Colombia", id: "2", image: "assets/images/co.png");
   List<Country> countryList = [];
+
+  void _loadCountry() async {
+    try {
+      SharedPreferences _prefs = await SharedPreferences.getInstance();
+      await _prefs.setString('country', 'Honduras');
+      var _country = _prefs.getString("country") ?? "";
+      if (_country != "") {
+        Country _selectedCountry =
+            countryList.firstWhere((country) => country.name == country);
+      } else {
+        print(_prefs.getString('country'));
+      }
+    } catch (e) {
+      print(e);
+    }
+  }
 
   @override
   void initState() {
@@ -27,7 +44,8 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
           children: [
             Image.asset(
               item.image,
-              height: 20,
+              //height: 20,
+              width: 30,
             ),
             Container(
               margin: EdgeInsets.only(left: 20),
@@ -37,7 +55,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
               child: Text(
                 item.name,
                 style: TextStyle(
-                    fontSize: 14,
+                    fontSize: 16,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
               ),
