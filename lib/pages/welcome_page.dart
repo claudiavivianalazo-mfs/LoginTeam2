@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_modular/flutter_modular.dart';
 import '../../widgets/dropdown_button_img_txt.dart';
 import '../widgets/background_tigo.dart';
 import '../widgets/button_styles.dart';
@@ -8,11 +9,12 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SizeConfig().init(context);
     return BackgroundTigo(
       child: Stack(
         children: <Widget>[
           Container(
-            height: 300,
+            height: SizeConfig.blockSizeVertical * 40,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -32,9 +34,10 @@ class WelcomePage extends StatelessWidget {
             ),
           ),
           Container(
+            /// Container del card
             margin: const EdgeInsets.fromLTRB(40, 160, 40, 20),
-            width: double.infinity,
-            height: double.infinity,
+            width: SizeConfig.blockSizeHorizontal * 98,
+            height: SizeConfig.blockSizeVertical * 70,
             decoration: const BoxDecoration(
               boxShadow: [
                 BoxShadow(
@@ -66,34 +69,69 @@ class WelcomePage extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  flex: 6,
+                  flex: 5,
                   child: Container(
-                    height: 300,
                     width: double.infinity,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
-                          DropdownButtonImgTxt(),
-                          TextButton.icon(
-                            style: textButtonStyle,
-                            onPressed: () => {},
-                            icon: const Icon(
-                              Icons.mail_outline,
-                            ),
-                            label: const Text(
-                              'Iniciar con correo electrónico',
+                          Container(
+                            margin: const EdgeInsets.only(top: 70),
+                            child: DropdownButtonImgTxt(),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 46,
+                            margin: const EdgeInsets.only(
+                                top: 30, bottom: 10, left: 15, right: 15),
+                            child: TextButton.icon(
+                              label:
+                                  const Text('Iniciar con correo electrónico'),
+                              style: textButtonStyle,
+                              onPressed: () {
+                                Modular.to.navigate('/login2');
+                              },
+                              icon: const Icon(
+                                Icons.mail_outline,
+                              ),
                             ),
                           ),
-                          TextButton.icon(
-                            style: textButtonStyle,
-                            onPressed: () => {},
-                            icon: const Icon(
-                              Icons.phone_outlined,
-                            ),
-                            label: const Text(
-                              'Iniciar con número de teléfono',
+                          Container(
+                            width: double.infinity,
+                            height: 46,
+                            margin: const EdgeInsets.only(
+                                top: 10, bottom: 10, left: 15, right: 15),
+                            child: TextButton.icon(
+                              style: textButtonStyle,
+                              onPressed: () => {},
+                              icon: const Icon(
+                                Icons.phone_outlined,
+                              ),
+                              label: const Text(
+                                'Iniciar con número de teléfono',
+                              ),
                             ),
                           ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 3,
+                  child: Container(
+                      width: double.infinity,
+                      decoration: const BoxDecoration(
+                        //color: Colors.green,
+                        borderRadius: BorderRadius.only(
+                          bottomLeft: Radius.circular(10),
+                          bottomRight: Radius.circular(10),
+                        ),
+                      ),
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
                           const Divider(
                             height: 10,
                             thickness: 1,
@@ -101,35 +139,21 @@ class WelcomePage extends StatelessWidget {
                             endIndent: 20,
                             color: Colors.grey,
                           ),
-                        ]),
-                  ),
-                ),
-                Expanded(
-                  flex: 2,
-                  child: Container(
-                      decoration: const BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.only(
-                          bottomLeft: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      ),
-                      child: Column(
-                        children: <Widget>[
-                          const Text('¿No tienes una cuenta?'),
-                          ElevatedButton(
-                            onPressed: null,
-                            child: const Text(
-                              'Crear una cuenta Tigo Money',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
+                          Container(
+                            margin: const EdgeInsets.only(top: 15),
+                            child: const Text('¿No tienes una cuenta?'),
+                          ),
+                          Container(
+                            width: double.infinity,
+                            height: 46,
+                            margin: const EdgeInsets.only(
+                                top: 4, left: 15, right: 15),
+                            child: ElevatedButton(
+                              onPressed: () {},
+                              child: const Text(
+                                'Crear una cuenta Tigo Money',
                               ),
-                            ),
-                            style: ButtonStyle(
-                              backgroundColor:
-                                  MaterialStateProperty.all(Color(0xff363853)),
-                              foregroundColor:
-                                  MaterialStateProperty.all(Colors.white),
+                              style: elevatedButtonStyle,
                             ),
                           ),
                         ],
@@ -156,5 +180,21 @@ class WelcomePage extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class SizeConfig {
+  static late MediaQueryData _mediaQueryData;
+  static late double screenWidth;
+  static late double screenHeight;
+  static late double blockSizeHorizontal;
+  static late double blockSizeVertical;
+
+  void init(BuildContext context) {
+    _mediaQueryData = MediaQuery.of(context);
+    screenWidth = _mediaQueryData.size.width;
+    screenHeight = _mediaQueryData.size.height;
+    blockSizeHorizontal = screenWidth / 100;
+    blockSizeVertical = screenHeight / 100;
   }
 }
