@@ -17,17 +17,17 @@ dependencies:
   encrypt: ^5.0.1
   auth0:
     git:
-      # url: https://github.com/Millicom-MFS/AuthModule-Mobile
-      url: git@github.com:Millicom-MFS/AuthModule-Mobile
+      url:https://github.com/Millicom-MFS/AuthModule-Mobile
+      #  url: git@github.com:Millicom-MFS/AuthModule-Mobile
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^1.0.0
 
-# dependency_overrides:
-#   auth0:
-#     path: C:\Users\micontreras\Documents\Project\AuthModule-Mobile
+dependency_overrides:
+  auth0:
+    path: C:\Users\gaston.menese\Desktop\TIGO\modulos\AuthModule-Mobile
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
