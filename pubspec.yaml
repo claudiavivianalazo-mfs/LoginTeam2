@@ -23,11 +23,12 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  flutter_svg: ^1.0.3
   flutter_lints: ^1.0.0
 
-# dependency_overrides:
-#   auth0:
-#     path: C:\Users\micontreras\Documents\Project\AuthModule-Mobile
+dependency_overrides:
+  auth0:
+    path: ..\AuthModule-Mobile
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
