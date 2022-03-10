@@ -76,10 +76,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
                 width: 25,
               ),
               Container(
-                margin: EdgeInsets.only(left: 30),
-                decoration: BoxDecoration(
-                    //color: Colors.yellow,
-                    ),
+                margin: EdgeInsets.only(left: 20),
                 child: Text(_selectedCountry.name),
               ),
             ],
@@ -117,6 +114,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
         countryList = parseCountries(resp.body);
         _selectedCountry = countryList[1];
       });
+      _loadCountry();
     } else {
       debugPrint("Service error. Fetching items from local storage");
     }

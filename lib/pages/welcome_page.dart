@@ -18,8 +18,8 @@ class WelcomePage extends StatelessWidget {
             height: SizeConfig.blockSizeVertical * 40,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.cover,
-                image: AssetImage('assets/images/group1964.png'),
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/loginBackground.png'),
               ),
             ),
           ),
@@ -37,23 +37,12 @@ class WelcomePage extends StatelessWidget {
           ),
           Container(
             /// Container del card
-            margin: const EdgeInsets.fromLTRB(40, 160, 40, 20),
-            width: SizeConfig.blockSizeHorizontal * 98,
+            margin: const EdgeInsets.fromLTRB(20, 160, 20, 20),
+            width: SizeConfig.blockSizeHorizontal * 100,
             height: SizeConfig.blockSizeVertical * 70,
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 179, 177, 177),
-                  offset: Offset(
-                    0.04,
-                    0.02,
-                  ),
-                  blurRadius: 50.0,
-                  spreadRadius: 0.03,
-                ),
-              ],
-            ),
+            // decoration: const BoxDecoration(),
             child: Card(
+              elevation: 3,
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(10),
               ),
@@ -92,7 +81,7 @@ class WelcomePage extends StatelessWidget {
                                   const Text('Iniciar con correo electrónico'),
                               style: textButtonStyle,
                               onPressed: () {
-                                Modular.to.navigate('/login2');
+                                Modular.to.pushNamed('/loginEmail');
                               },
                               icon: const Icon(
                                 Icons.mail_outline,
