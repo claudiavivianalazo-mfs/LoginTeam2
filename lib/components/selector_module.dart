@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/pages/intro_page.dart';
 import 'package:wallet_tigomoney2_0_mobile_login/pages/login_page.dart';
-import 'package:wallet_tigomoney2_0_mobile_login/pages/onboarding_page.dart';
+
 
 class SelectorPage extends StatefulWidget {
   const SelectorPage({Key? key}) : super(key: key);
@@ -33,6 +34,6 @@ class SelectorState extends State<SelectorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return isFirstRun ? OnboardingPage() : LoginPage();
+    return isFirstRun ? IntroPage() : LoginPage();
   }
 }
