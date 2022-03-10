@@ -29,6 +29,10 @@ class InputText extends StatelessWidget {
             labelStyle: const TextStyle(color: Color(0xFF808FA1)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
+          validator: (value) {
+            if (value != '') return null;
+            return 'Este campo no puede estar vacío';
+          },
         ));
   }
 }
