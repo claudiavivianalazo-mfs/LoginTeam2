@@ -11,7 +11,7 @@ class InputText extends StatelessWidget {
         width: double.infinity,
         child: TextFormField(
           style: const TextStyle(
-            height: 0.3,
+            height: 0.1,
             fontSize: 14.0,
             color: Color(0xFF343C46),
           ),
