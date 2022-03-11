@@ -26,7 +26,8 @@ class LoginPhonePinScreen extends StatelessWidget {
               "Iniciar sesión",
               style: TextStyle(
                   color: const Color.fromRGBO(52, 60, 70, 1),
-                  fontSize: (18 * textScaleFactor)),
+                  fontSize: (18 * textScaleFactor),
+                  fontWeight: FontWeight.bold),
             ),
           ),
           Container(
@@ -38,12 +39,13 @@ class LoginPhonePinScreen extends StatelessWidget {
                   Expanded(
                       child: Container(
                     padding: const EdgeInsets.only(right: 5.0),
-                    child: InputText(labelText: 'Código país'),
+                    child: InputText(
+                        labelText: 'Código país', preWrittenValue: '+504'),
                   )),
                   Expanded(
                       child: Container(
                     padding: const EdgeInsets.only(left: 5.0),
-                    child: InputText(labelText: 'No. Celular'),
+                    child: InputText(labelText: 'No. Celular', preWrittenValue: '765301823'),
                   )),
                 ],
               )),
@@ -53,7 +55,7 @@ class LoginPhonePinScreen extends StatelessWidget {
                   top: availableWidth * 0.05,
                   right: availableWidth * 0.05,
                   left: availableWidth * 0.05),
-              child: InputPassword(labelText: 'Pin')),
+              child: InputPassword(labelText: 'Pin', autoFocusHint: true)),
           Container(
             padding: EdgeInsets.only(
                 right: availableWidth * 0.05,
@@ -73,7 +75,7 @@ class LoginPhonePinScreen extends StatelessWidget {
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
               child: ElevatedButton(
                 style: elevatedButtonStyle,
-                onPressed: () {},
+                onPressed: () async {},
                 child: const Text('Ingresar'),
               )),
           Container(
@@ -102,8 +104,8 @@ class LoginPhonePinScreen extends StatelessWidget {
               width: totalHeight * 0.80,
               padding: EdgeInsets.only(
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
-              child: ElevatedButton(
-                style: elevatedButtonStyle,
+              child: TextButton(
+                style: textButtonStyle,
                 onPressed: () {},
                 child: const Text('Crear una cuenta Tigo Money'),
               )),

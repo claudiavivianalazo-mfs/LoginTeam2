@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/services/notifications_service.dart';
 
 class InputPassword extends StatefulWidget {
   final String labelText;
+  final bool autoFocusHint;
   final Function? passwordHandler;
-  InputPassword(
-      {required this.labelText, this.passwordHandler});
+  InputPassword({required this.labelText, this.autoFocusHint = false, this.passwordHandler});
 
   @override
   State<StatefulWidget> createState() => InputPasswordState(
-      labelText: labelText,
-      passwordHandler: passwordHandler,
-  );
+        labelText: labelText,
+        passwordHandler: passwordHandler,
+      );
 }
 
 class InputPasswordState extends State<InputPassword> {
@@ -30,6 +31,7 @@ class InputPasswordState extends State<InputPassword> {
     return Container(
         width: double.infinity,
         child: TextFormField(
+          autofocus: widget.autoFocusHint,
           onChanged: (text) => setState(() {
             passwordHandler != null ? passwordHandler!(text) : null;
           }),
@@ -60,8 +62,9 @@ class InputPasswordState extends State<InputPassword> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           validator: (value) {
-            if (value != '') return null;
-            return 'Contraseña o número de celular incorrecto';
+            String pass = 'apartamento';
+            if (value == pass) return null;
+            return NotificationsService.showSnackBar('Contraseña o número de celular incorrecto');
           },
         ));
   }
