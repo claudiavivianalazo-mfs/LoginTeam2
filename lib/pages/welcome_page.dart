@@ -112,7 +112,7 @@ class WelcomePage extends StatelessWidget {
                             child: OutlinedButton.icon(
                               style: textButtonStyle,
                               onPressed: () {
-                                Modular.to.pushNamed('/loginPhone');
+                                Modular.to.pushNamed('/loginPhonePin');
                               },
                               icon: const Icon(
                                 Icons.phone_outlined,
@@ -170,7 +170,9 @@ class WelcomePage extends StatelessWidget {
                                 left: availableWidth * 0.05,
                                 right: availableWidth * 0.05),
                             child: ElevatedButton(
-                              onPressed: () {},
+                              onPressed: () {
+                                Modular.to.pushNamed('/signin');
+                              },
                               child: Text('Crear una cuenta Tigo Money',
                                   style: TextStyle(
                                     //color: const Color.fromRGBO(52, 60, 70, 1),
