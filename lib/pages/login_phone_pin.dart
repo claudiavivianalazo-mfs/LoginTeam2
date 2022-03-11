@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/widgets/button_styles.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/widgets/inputs/input_password.dart';
 import '../widgets/login_scaffold.dart';
+import '../widgets/inputs/input_text.dart';
 
 class LoginPhonePinScreen extends StatelessWidget {
   const LoginPhonePinScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xff363853);
     final textScaleFactor = MediaQuery.of(context).textScaleFactor;
     final availableWidth = MediaQuery.of(context).size.width;
     final totalHeight = MediaQuery.of(context).size.height;
@@ -30,25 +34,26 @@ class LoginPhonePinScreen extends StatelessWidget {
               padding: EdgeInsets.only(
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
               child: Row(
-                children: const [
-                  Flexible(
-                      child: TextField(
-                    decoration: InputDecoration(helperText: 'Código País'),
+                children: [
+                  Expanded(
+                      child: Container(
+                    padding: const EdgeInsets.only(right: 5.0),
+                    child: InputText(labelText: 'Código país'),
                   )),
-                  Flexible(
-                      child: TextField(
-                    decoration: InputDecoration(helperText: 'No. Celular'),
-                  ))
+                  Expanded(
+                      child: Container(
+                    padding: const EdgeInsets.only(left: 5.0),
+                    child: InputText(labelText: 'No. Celular'),
+                  )),
                 ],
               )),
           Container(
-            height: totalHeight * 0.11,
-            padding: EdgeInsets.only(
-                right: availableWidth * 0.05, left: availableWidth * 0.05),
-            child: const TextField(
-              decoration: InputDecoration(helperText: 'Pin'),
-            ),
-          ),
+              height: totalHeight * 0.11,
+              padding: EdgeInsets.only(
+                  top: availableWidth * 0.05,
+                  right: availableWidth * 0.05,
+                  left: availableWidth * 0.05),
+              child: InputPassword(labelText: 'Pin')),
           Container(
             padding: EdgeInsets.only(
                 right: availableWidth * 0.05,
@@ -63,15 +68,11 @@ class LoginPhonePinScreen extends StatelessWidget {
           ),
           Container(
               height: totalHeight * 0.06,
+              width: totalHeight * 0.80,
               padding: EdgeInsets.only(
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    minimumSize: const Size.fromHeight(10),
-                    primary: Colors.blueGrey),
+                style: elevatedButtonStyle,
                 onPressed: () {},
                 child: const Text('Ingresar'),
               )),
@@ -98,31 +99,37 @@ class LoginPhonePinScreen extends StatelessWidget {
           ),
           Container(
               height: totalHeight * 0.06,
+              width: totalHeight * 0.80,
               padding: EdgeInsets.only(
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(18),
-                    ),
-                    minimumSize: const Size.fromHeight(10),
-                    primary: Colors.blueGrey),
+                style: elevatedButtonStyle,
                 onPressed: () {},
                 child: const Text('Crear una cuenta Tigo Money'),
               )),
           Container(
             padding: EdgeInsets.only(
-                top: availableWidth * 0.20,
-                bottom: availableWidth * 0.05,
+                top: availableWidth * 0.270,
                 right: availableWidth * 0.05,
                 left: availableWidth * 0.05),
             child: const Align(
               alignment: Alignment.center,
               child: Text(
-                "Al hacer clic en Ingresar, estás aceptando nuestros Términos y Condiciones",
+                "Al hacer clic en Ingresar, estás aceptando nuestros",
               ),
             ),
           ),
+          Container(
+            alignment: Alignment.centerLeft,
+            padding: EdgeInsets.only(
+                right: availableWidth * 0.05, left: availableWidth * 0.05),
+            child: GestureDetector(
+              child: const Text("Términos y Condiciones",
+                  style: TextStyle(
+                      decoration: TextDecoration.underline,
+                      color: primaryColor)),
+            ),
+          )
         ],
       ),
     );
