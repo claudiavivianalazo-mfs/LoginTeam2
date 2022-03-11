@@ -1,11 +1,35 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:wallet_tigomoney2_0_mobile_login/widgets/button_styles.dart';
 import 'package:wallet_tigomoney2_0_mobile_login/widgets/inputs/input_password.dart';
 import '../widgets/login_scaffold.dart';
 import '../widgets/inputs/input_text.dart';
 
-class LoginPhonePinScreen extends StatelessWidget {
+class LoginPhonePinScreen extends StatefulWidget {
   const LoginPhonePinScreen({Key? key}) : super(key: key);
+
+  @override
+  State<StatefulWidget> createState() => _LoginPhonePinScreenState();
+}
+
+class _LoginPhonePinScreenState extends State<LoginPhonePinScreen> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+
+  String _passwordValue = '';
+  void _passwordHandler(String text) {
+    setState(() {
+      _passwordValue = text;
+    });
+  }
+
+  void _signHandler() {
+    final bool isValid = _formKey.currentState!.validate();
+    if (isValid) {
+      if (kDebugMode) {
+        print('Got valid input');
+      }
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +69,8 @@ class LoginPhonePinScreen extends StatelessWidget {
                   Expanded(
                       child: Container(
                     padding: const EdgeInsets.only(left: 5.0),
-                    child: InputText(labelText: 'No. Celular', preWrittenValue: '765301823'),
+                    child: InputText(
+                        labelText: 'No. Celular', preWrittenValue: '765301823'),
                   )),
                 ],
               )),
@@ -55,7 +80,10 @@ class LoginPhonePinScreen extends StatelessWidget {
                   top: availableWidth * 0.05,
                   right: availableWidth * 0.05,
                   left: availableWidth * 0.05),
-              child: InputPassword(labelText: 'Pin', autoFocusHint: true)),
+              child: InputPassword(
+                  labelText: 'Pin',
+                  autoFocusHint: true,
+                  passwordHandler: _passwordHandler)),
           Container(
             padding: EdgeInsets.only(
                 right: availableWidth * 0.05,
@@ -75,7 +103,7 @@ class LoginPhonePinScreen extends StatelessWidget {
                   right: availableWidth * 0.05, left: availableWidth * 0.05),
               child: ElevatedButton(
                 style: elevatedButtonStyle,
-                onPressed: () async {},
+                onPressed: _passwordValue.isNotEmpty ? _signHandler : null,
                 child: const Text('Ingresar'),
               )),
           Container(
