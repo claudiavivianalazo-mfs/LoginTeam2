@@ -13,20 +13,19 @@ class InputText extends StatelessWidget {
         width: double.infinity,
         child: TextFormField(
           style: const TextStyle(
-            height: 0.3,
             fontSize: 14.0,
             color: Color(0xFF343C46),
           ),
           decoration: InputDecoration(
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFF808FA1))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Colors.grey)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFF808FA1))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Colors.grey)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFFD95A3A))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Color(0xFFD95A3A))),
             labelText: labelText,
             labelStyle: const TextStyle(color: Color(0xFF808FA1)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
