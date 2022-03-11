@@ -4,12 +4,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/dropdown_button_img_txt.dart';
 import '../widgets/background_tigo.dart';
 import '../widgets/button_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xff363853);
+    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final availableWidth = MediaQuery.of(context).size.width;
+    final totalHeight = MediaQuery.of(context).size.height;
+
     SizeConfig().init(context);
     return BackgroundTigo(
       child: Stack(
@@ -19,15 +25,17 @@ class WelcomePage extends StatelessWidget {
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
-                image: AssetImage('assets/images/group1964.png'),
+                image: AssetImage('assets/images/loginBackground.png'),
               ),
             ),
           ),
           //SvgPicture.asset('assets/images/Group_1964.svg', fit: BoxFit.contain),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
-            width: 70,
-            height: 70,
+            margin: EdgeInsets.symmetric(
+                vertical: SizeConfig.screenHeight * 0.065,
+                horizontal: SizeConfig.screenWidth * 0.10),
+            width: availableWidth * 0.18,
+            height: availableWidth * 0.18,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -37,25 +45,13 @@ class WelcomePage extends StatelessWidget {
           ),
           Container(
             /// Container del card
-            margin: const EdgeInsets.fromLTRB(40, 160, 40, 20),
+            margin: const EdgeInsets.fromLTRB(20, 160, 20, 20),
             width: SizeConfig.blockSizeHorizontal * 98,
             height: SizeConfig.blockSizeVertical * 70,
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: Color.fromARGB(255, 179, 177, 177),
-                  offset: Offset(
-                    0.04,
-                    0.02,
-                  ),
-                  blurRadius: 50.0,
-                  spreadRadius: 0.03,
-                ),
-              ],
-            ),
             child: Card(
+              elevation: 1,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Column(children: <Widget>[
                 Expanded(
@@ -64,8 +60,8 @@ class WelcomePage extends StatelessWidget {
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
                     ),
                   ),
@@ -79,20 +75,26 @@ class WelcomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            margin: const EdgeInsets.only(top: 70),
+                            margin: EdgeInsets.only(top: totalHeight * 0.094),
                             child: DropdownButtonImgTxt(),
                           ),
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 30, bottom: 10, left: 15, right: 15),
-                            child: TextButton.icon(
-                              label:
-                                  const Text('Iniciar con correo electrónico'),
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.042,
+                                bottom: totalHeight * 0.012,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
+                            child: OutlinedButton.icon(
+                              label: Text('Iniciar con correo electrónico',
+                                  style: TextStyle(
+                                    color: const Color.fromRGBO(52, 60, 70, 1),
+                                    fontSize: (16 * textScaleFactor),
+                                  )),
                               style: textButtonStyle,
                               onPressed: () {
-                                Modular.to.navigate('/login2');
+                                Modular.to.pushNamed('/loginEmail');
                               },
                               icon: const Icon(
                                 Icons.mail_outline,
@@ -102,16 +104,25 @@ class WelcomePage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 15, right: 15),
-                            child: TextButton.icon(
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.018,
+                                bottom: totalHeight * 0.012,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
+                            child: OutlinedButton.icon(
                               style: textButtonStyle,
-                              onPressed: () => {},
+                              onPressed: () {
+                                Modular.to.pushNamed('/loginPhone');
+                              },
                               icon: const Icon(
                                 Icons.phone_outlined,
                               ),
-                              label: const Text(
+                              label: Text(
                                 'Iniciar con número de teléfono',
+                                style: TextStyle(
+                                  color: const Color.fromRGBO(52, 60, 70, 1),
+                                  fontSize: (16 * textScaleFactor),
+                                ),
                               ),
                             ),
                           ),
@@ -143,18 +154,28 @@ class WelcomePage extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 15),
-                            child: const Text('¿No tienes una cuenta?'),
+                            child: Text(
+                              '¿No tienes una cuenta?',
+                              style: TextStyle(
+                                color: const Color.fromRGBO(52, 60, 70, 1),
+                                fontSize: (18 * textScaleFactor),
+                              ),
+                            ),
                           ),
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 4, left: 15, right: 15),
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.018,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
                             child: ElevatedButton(
                               onPressed: () {},
-                              child: const Text(
-                                'Crear una cuenta Tigo Money',
-                              ),
+                              child: Text('Crear una cuenta Tigo Money',
+                                  style: TextStyle(
+                                    //color: const Color.fromRGBO(52, 60, 70, 1),
+                                    fontSize: (16 * textScaleFactor),
+                                  )),
                               style: elevatedButtonStyle,
                             ),
                           ),
@@ -166,8 +187,8 @@ class WelcomePage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 200,
-            margin: const EdgeInsets.fromLTRB(46, 80, 20, 46),
+            height: 220,
+            margin: const EdgeInsets.fromLTRB(20, 60, 4, 40),
             //child: SvgPicture.asset('assets/images/climber.svg'),
             decoration: const BoxDecoration(
               image: DecorationImage(
