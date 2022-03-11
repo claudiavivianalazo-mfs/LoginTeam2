@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/services/notifications_service.dart';
 
 class InputPassword extends StatefulWidget {
   final String labelText;
-  final bool autoFocusHint;
-  InputPassword({required this.labelText, this.autoFocusHint = false});
+  final Function? passwordHandler;
+  InputPassword({required this.labelText, this.passwordHandler});
 
   @override
-  State<StatefulWidget> createState() =>
-      InputPasswordState(labelText: labelText);
+  State<StatefulWidget> createState() => InputPasswordState(
+        labelText: labelText,
+        passwordHandler: passwordHandler,
+      );
 }
 
 class InputPasswordState extends State<InputPassword> {
   final String labelText;
-  InputPasswordState({required this.labelText});
+  final Function? passwordHandler;
+  InputPasswordState({required this.labelText, this.passwordHandler});
 
   bool _obscureText = true;
   void _toggle() {
@@ -26,23 +30,25 @@ class InputPasswordState extends State<InputPassword> {
     return Container(
         width: double.infinity,
         child: TextFormField(
-          autofocus: widget.autoFocusHint,
+          onChanged: (text) => setState(() {
+            passwordHandler != null ? passwordHandler!(text) : null;
+          }),
           style: const TextStyle(
-            height: 0.3,
             fontSize: 14.0,
             color: Color(0xFF343C46),
           ),
           obscureText: _obscureText,
           decoration: InputDecoration(
             border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFF808FA1))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Colors.grey)),
             focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFF808FA1))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide: const BorderSide(width: 1, color: Colors.grey)),
             errorBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(16.0),
-                borderSide: const BorderSide(color: Color(0xFFD95A3A))),
+                borderRadius: BorderRadius.circular(10.0),
+                borderSide:
+                    const BorderSide(width: 1, color: Color(0xFFD95A3A))),
             suffixIcon: IconButton(
                 onPressed: () {
                   _toggle();
@@ -54,8 +60,9 @@ class InputPasswordState extends State<InputPassword> {
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           validator: (value) {
-            if (value != '') return null;
-            return 'Contraseña o número de celular incorrecto';
+            String pass = 'apartamento';
+            if (value == pass) return null;
+            return NotificationsService.showSnackBar('Contraseña o número de celular incorrecto');
           },
         ));
   }

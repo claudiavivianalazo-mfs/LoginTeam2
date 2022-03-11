@@ -52,10 +52,13 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       return DropdownMenuItem<Country>(
         child: Row(
           children: [
-            Image.asset(
-              item.image,
-              //height: 20,
-              width: 30,
+            ClipOval(
+              child: Image.asset(
+                item.image,
+                height: 30,
+                width: 30,
+                fit: BoxFit.cover,
+              ),
             ),
             Container(
               margin: EdgeInsets.only(left: 20),
@@ -81,12 +84,18 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
         DropdownMenuItem<Country>(
           child: Row(
             children: [
-              Image.asset(
-                _selectedCountry.image,
-                width: 25,
+              Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Image.asset(
+                  _selectedCountry.image,
+                  width: 25,
+                ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 20),
+                margin: EdgeInsets.only(left: 10),
+                decoration: BoxDecoration(
+                    //color: Colors.yellow,
+                    ),
                 child: Text(_selectedCountry.name),
               ),
             ],
@@ -104,7 +113,6 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       ),
       child: DropdownButtonHideUnderline(
         child: ButtonTheme(
-          alignedDropdown: true,
           child: DropdownButton<Country>(
               hint: const Text('Seleccione un pais'),
               items: items3,
