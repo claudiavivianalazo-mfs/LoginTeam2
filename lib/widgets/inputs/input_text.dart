@@ -1,6 +1,8 @@
 // import 'package:email_validator/email_validator.dart';
 import 'package:flutter/material.dart';
 
+import '../../services/notifications_service.dart';
+
 class InputText extends StatelessWidget {
   final String labelText;
   bool isEmail;
@@ -25,12 +27,14 @@ class InputText extends StatelessWidget {
                 borderSide: const BorderSide(width: 1, color: Colors.grey)),
             errorBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(10.0),
-                borderSide: const BorderSide(width: 1, color: Color(0xFFD95A3A))),
+                borderSide:
+                    const BorderSide(width: 1, color: Color(0xFFD95A3A))),
             labelText: labelText,
             labelStyle: const TextStyle(color: Color(0xFF808FA1)),
             floatingLabelBehavior: FloatingLabelBehavior.always,
           ),
           validator: (value) {
+            String prueba = "prueba@prueba.com";
             if (value != '') {
               if (isEmail) {
                 String pattern =
@@ -38,7 +42,10 @@ class InputText extends StatelessWidget {
                 RegExp regExp = RegExp(pattern);
 
                 return regExp.hasMatch(value ?? '')
-                    ? null
+                    ? value == prueba
+                        ? null
+                        : NotificationsService.showSnackBar(
+                            'Tu email o password no son correctos, por favor intenta de nuevo')
                     : 'El valor ingresado no es un correo';
               }
               return null;

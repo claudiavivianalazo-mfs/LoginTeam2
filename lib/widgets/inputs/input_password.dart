@@ -4,19 +4,24 @@ import 'package:wallet_tigomoney2_0_mobile_login/services/notifications_service.
 class InputPassword extends StatefulWidget {
   final String labelText;
   final Function? passwordHandler;
-  InputPassword({required this.labelText, this.passwordHandler});
+  bool isEmail;
+  InputPassword(
+      {required this.labelText, this.passwordHandler, this.isEmail = false});
 
   @override
   State<StatefulWidget> createState() => InputPasswordState(
         labelText: labelText,
         passwordHandler: passwordHandler,
+        isEmail: isEmail,
       );
 }
 
 class InputPasswordState extends State<InputPassword> {
   final String labelText;
   final Function? passwordHandler;
-  InputPasswordState({required this.labelText, this.passwordHandler});
+  bool isEmail;
+  InputPasswordState(
+      {required this.labelText, this.passwordHandler, required this.isEmail});
 
   bool _obscureText = true;
   void _toggle() {
@@ -62,7 +67,11 @@ class InputPasswordState extends State<InputPassword> {
           validator: (value) {
             String pass = 'apartamento';
             if (value == pass) return null;
-            return NotificationsService.showSnackBar('Contraseña o número de celular incorrecto');
+            return isEmail
+                ? NotificationsService.showSnackBar(
+                    'Tu email o password no son correctos, por favor intenta de nuevo')
+                : NotificationsService.showSnackBar(
+                    'Contraseña o número de celular incorrecto');
           },
         ));
   }

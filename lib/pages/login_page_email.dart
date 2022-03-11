@@ -15,6 +15,13 @@ class LoginPageEmail extends StatefulWidget {
 class _LoginPageEmailState extends State<LoginPageEmail> {
   final GlobalKey<FormState> _formKey = GlobalKey();
 
+  String _passwordValue = '';
+  void _passwordHandler(String text) {
+    setState(() {
+      _passwordValue = text;
+    });
+  }
+
   void _signHandler() {
     final bool isValid = _formKey.currentState!.validate();
     if (isValid) {
@@ -63,7 +70,11 @@ class _LoginPageEmailState extends State<LoginPageEmail> {
               height: totalHeight * 0.11,
               padding: EdgeInsets.only(
                   left: availableWidth * 0.05, right: availableWidth * 0.05),
-              child: InputPassword(labelText: 'Contraseña'),
+              child: InputPassword(
+                labelText: 'Contraseña',
+                passwordHandler: _passwordHandler,
+                isEmail: true,
+              ),
             ),
             Container(
               height: totalHeight * 0.09,
@@ -90,7 +101,7 @@ class _LoginPageEmailState extends State<LoginPageEmail> {
               child: ElevatedButton(
                 child: const Text("Ingresar"),
                 style: elevatedButtonStyle,
-                onPressed: _signHandler,
+                onPressed: _passwordValue.isNotEmpty ? _signHandler : null,
               ),
             ),
             Container(
