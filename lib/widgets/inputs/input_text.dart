@@ -7,13 +7,19 @@ class InputText extends StatelessWidget {
   final String labelText;
   bool isEmail;
 
-  InputText({required this.labelText, this.isEmail = false});
+  final String preWrittenValue;
+
+  InputText(
+      {required this.labelText,
+      this.preWrittenValue = "",
+      this.isEmail = false});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
         child: TextFormField(
+          initialValue: preWrittenValue,
           style: const TextStyle(
             fontSize: 14.0,
             color: Color(0xFF343C46),
