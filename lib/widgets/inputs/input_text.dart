@@ -2,14 +2,16 @@ import 'package:flutter/material.dart';
 
 class InputText extends StatelessWidget {
   final String labelText;
+  final String preWrittenValue;
 
-  InputText({required this.labelText});
+  InputText({required this.labelText, this.preWrittenValue = ""});
 
   @override
   Widget build(BuildContext context) {
     return Container(
         width: double.infinity,
         child: TextFormField(
+          initialValue: preWrittenValue,
           style: const TextStyle(
             height: 0.3,
             fontSize: 14.0,

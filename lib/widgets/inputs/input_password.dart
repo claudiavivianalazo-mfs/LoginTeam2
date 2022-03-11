@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 
 class InputPassword extends StatefulWidget {
   final String labelText;
-  InputPassword({required this.labelText});
+  final bool autoFocusHint;
+  InputPassword({required this.labelText, this.autoFocusHint = false});
 
   @override
-  State<StatefulWidget> createState() => InputPasswordState(labelText: labelText);
+  State<StatefulWidget> createState() =>
+      InputPasswordState(labelText: labelText);
 }
 
 class InputPasswordState extends State<InputPassword> {
@@ -24,6 +26,7 @@ class InputPasswordState extends State<InputPassword> {
     return Container(
         width: double.infinity,
         child: TextFormField(
+          autofocus: widget.autoFocusHint,
           style: const TextStyle(
             height: 0.3,
             fontSize: 14.0,
