@@ -71,12 +71,15 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
         DropdownMenuItem<Country>(
           child: Row(
             children: [
-              Image.asset(
-                _selectedCountry.image,
-                width: 25,
+              Container(
+                padding: EdgeInsets.only(left: 10),
+                child: Image.asset(
+                  _selectedCountry.image,
+                  width: 25,
+                ),
               ),
               Container(
-                margin: EdgeInsets.only(left: 30),
+                margin: EdgeInsets.only(left: 10),
                 decoration: BoxDecoration(
                     //color: Colors.yellow,
                     ),
@@ -97,7 +100,6 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       ),
       child: DropdownButtonHideUnderline(
         child: ButtonTheme(
-          alignedDropdown: true,
           child: DropdownButton<Country>(
             hint: const Text('Seleccione un pais'),
             items: items3,

@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../widgets/inputs/input_text.dart';
 import '../widgets/inputs/input_password.dart';
 import '../widgets/login_scaffold.dart';
+import '../widgets/dropdown_button_img_txt.dart';
+import '../widgets/button_styles.dart';
 
 class SigninPage extends StatefulWidget {
   @override
@@ -11,6 +13,13 @@ class SigninPage extends StatefulWidget {
 
 class _SigninState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
+  
+  String _passwordValue = '';
+  void _passwordHandler(String text) {
+    setState(() {
+      _passwordValue = text;
+    });
+  }
 
   void _signHandler() {
     final bool isValid = _formKey.currentState!.validate();
@@ -27,10 +36,9 @@ class _SigninState extends State<SigninPage> {
       cardChild: Container(
         width: double.infinity,
         margin: const EdgeInsets.only(top: 10.0, left: 20.0, right: 20.0),
-        padding: const EdgeInsets.only(left: 15.0, right: 15.0),
         decoration: BoxDecoration(
-          color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
-          child: Form(
+            color: Colors.white, borderRadius: BorderRadius.circular(12.0)),
+        child: Form(
             key: _formKey,
             child: Column(children: [
               Container(
@@ -45,18 +53,20 @@ class _SigninState extends State<SigninPage> {
                   Expanded(
                       child: Container(
                     padding: const EdgeInsets.only(right: 5.0),
-                    child: InputText(labelText: 'Código país'),
+                    child: DropdownButtonImgTxt(),
                   )),
                   Expanded(
                       child: Container(
+                    height: 40,
                     padding: const EdgeInsets.only(left: 5.0),
                     child: InputText(labelText: 'No. Celular'),
                   )),
                 ],
               ),
               Container(
+                height: 40,
                 margin: const EdgeInsets.only(top: 30.0),
-                child: InputPassword(labelText: 'Contraseña'),
+                child: InputPassword(labelText: 'Contraseña', passwordHandler: _passwordHandler),
               ),
               Container(
                 width: double.infinity,
@@ -68,22 +78,14 @@ class _SigninState extends State<SigninPage> {
                 ),
               ),
               Container(
-                width: double.infinity,
-                height: 48,
-                margin: const EdgeInsets.only(top: 20.0),
-                child: ElevatedButton(
-                  child: const Text('Ingresar'),
-                  style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all<Color>(Color(0xFF363853)),
-                      shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(15.0),
-                      ))),
-                  onPressed: _signHandler,
-                )
-              ),
+                  width: double.infinity,
+                  height: 48,
+                  margin: const EdgeInsets.only(top: 20.0),
+                  child: ElevatedButton(
+                    child: const Text('Ingresar'),
+                    style: elevatedButtonStyle,
+                    onPressed: _passwordValue.isNotEmpty ? _signHandler : null,
+                  )),
               Container(
                 width: double.infinity,
                 height: 1,
@@ -101,26 +103,20 @@ class _SigninState extends State<SigninPage> {
                   height: 48,
                   margin: const EdgeInsets.only(top: 20.0),
                   child: ElevatedButton(
-                    child: const Text(
-                      'Crea una cuenta Tigo Money',
-                      style: TextStyle(color: Color(0xFF363853)),
-                    ),
+                    child: const Text('Crea una cuenta Tigo Money',
+                        style: TextStyle(color: Color(0xFF363853))),
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.all<Color>(Colors.white),
                         shape:
-                          MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(15.0),
-                                side: BorderSide(color: Color(0xFF363853))
-                              )
-                          )
-                    ),
+                            MaterialStateProperty.all<RoundedRectangleBorder>(
+                                RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(15.0),
+                                    side:
+                                        BorderSide(color: Color(0xFF363853))))),
                     onPressed: () {},
-                  )
-                )
-            ])
-          ),
+                  ))
+            ])),
       ),
     );
   }
