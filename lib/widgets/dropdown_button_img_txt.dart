@@ -43,7 +43,8 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
   @override
   void initState() {
     super.initState();
-    fetchCountries();
+    //fetchCountries();
+    _fillCountryList();
   }
 
   @override
@@ -52,6 +53,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       return DropdownMenuItem<Country>(
         child: Row(
           children: [
+            Container(),
             ClipOval(
               child: Image.asset(
                 item.image,
@@ -61,14 +63,14 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
               ),
             ),
             Container(
-              margin: EdgeInsets.only(left: 20),
+              margin: EdgeInsets.only(left: 10),
               decoration: const BoxDecoration(
                   //color: Colors.yellow,
                   ),
               child: Text(
                 item.name,
                 style: const TextStyle(
-                    fontSize: 16,
+                    fontSize: 14,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
               ),
@@ -85,10 +87,14 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
           child: Row(
             children: [
               Container(
-                padding: EdgeInsets.only(left: 10),
-                child: Image.asset(
-                  _selectedCountry.image,
-                  width: 25,
+                padding: EdgeInsets.only(left: 5),
+                child: ClipOval(
+                  child: Image.asset(
+                    _selectedCountry.image,
+                    height: 25,
+                    width: 25,
+                    fit: BoxFit.cover,
+                  ),
                 ),
               ),
               Container(
@@ -160,5 +166,6 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       Country(name: 'Mexico', id: '5', image: 'assets/images/mx.png'),
       Country(name: 'Paraguay', id: '6', image: 'assets/images/py.png'),
     });
+    _selectedCountry = countryList[1];
   }
 }
