@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 
 import 'appbar_login.dart';
 
@@ -18,17 +19,17 @@ class LoginScaffold extends StatelessWidget {
     double availableHeight = totalHeight - notAvailableHeight;
     double availableWidth = MediaQuery.of(context).size.width;
     return Scaffold(
+        backgroundColor: Colors.white,
         extendBodyBehindAppBar: true,
         appBar: appbarLogin,
         body: Stack(
           children: [
-            Container(
-              height: totalHeight * 0.45,
-              decoration: const BoxDecoration(
-                image: DecorationImage(
-                  image: AssetImage("assets/images/loginBackground.png"),
-                  fit: BoxFit.cover,
-                ),
+            SizedBox(
+              height: totalHeight * 0.38,
+              width: double.infinity,
+              child: SvgPicture.asset(
+                "assets/images/loginBackground.svg",
+                fit: BoxFit.fill,
               ),
             ),
             SingleChildScrollView(
