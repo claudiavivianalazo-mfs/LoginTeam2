@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:wallet_tigomoney2_0_mobile_login/services/notifications_service.dart';
 import '../widgets/inputs/input_text.dart';
 import '../widgets/inputs/input_password.dart';
 import '../widgets/login_scaffold.dart';
@@ -13,7 +14,7 @@ class SigninPage extends StatefulWidget {
 
 class _SigninState extends State<SigninPage> {
   final GlobalKey<FormState> _formKey = GlobalKey();
-  
+
   String _passwordValue = '';
   void _passwordHandler(String text) {
     setState(() {
@@ -66,7 +67,8 @@ class _SigninState extends State<SigninPage> {
               Container(
                 height: 40,
                 margin: const EdgeInsets.only(top: 30.0),
-                child: InputPassword(labelText: 'Contraseña', passwordHandler: _passwordHandler),
+                child: InputPassword(
+                    labelText: 'Contraseña', passwordHandler: _passwordHandler),
               ),
               Container(
                 width: double.infinity,
