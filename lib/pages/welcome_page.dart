@@ -11,6 +11,11 @@ class WelcomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const primaryColor = Color(0xff363853);
+    final textScaleFactor = MediaQuery.of(context).textScaleFactor;
+    final availableWidth = MediaQuery.of(context).size.width;
+    final totalHeight = MediaQuery.of(context).size.height;
+
     SizeConfig().init(context);
     return BackgroundTigo(
       child: Stack(
@@ -29,8 +34,8 @@ class WelcomePage extends StatelessWidget {
             margin: EdgeInsets.symmetric(
                 vertical: SizeConfig.screenHeight * 0.065,
                 horizontal: SizeConfig.screenWidth * 0.10),
-            width: 70,
-            height: 70,
+            width: availableWidth * 0.18,
+            height: availableWidth * 0.18,
             decoration: const BoxDecoration(
               image: DecorationImage(
                 fit: BoxFit.cover,
@@ -70,17 +75,23 @@ class WelcomePage extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.end,
                         children: <Widget>[
                           Container(
-                            margin: const EdgeInsets.only(top: 70),
+                            margin: EdgeInsets.only(top: totalHeight * 0.094),
                             child: DropdownButtonImgTxt(),
                           ),
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 30, bottom: 10, left: 15, right: 15),
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.042,
+                                bottom: totalHeight * 0.012,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
                             child: OutlinedButton.icon(
-                              label:
-                                  const Text('Iniciar con correo electrónico'),
+                              label: Text('Iniciar con correo electrónico',
+                                  style: TextStyle(
+                                    color: const Color.fromRGBO(52, 60, 70, 1),
+                                    fontSize: (16 * textScaleFactor),
+                                  )),
                               style: textButtonStyle,
                               onPressed: () {
                                 Modular.to.pushNamed('/loginEmail');
@@ -93,8 +104,11 @@ class WelcomePage extends StatelessWidget {
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 10, bottom: 10, left: 15, right: 15),
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.018,
+                                bottom: totalHeight * 0.012,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
                             child: OutlinedButton.icon(
                               style: textButtonStyle,
                               onPressed: () {
@@ -103,8 +117,12 @@ class WelcomePage extends StatelessWidget {
                               icon: const Icon(
                                 Icons.phone_outlined,
                               ),
-                              label: const Text(
+                              label: Text(
                                 'Iniciar con número de teléfono',
+                                style: TextStyle(
+                                  color: const Color.fromRGBO(52, 60, 70, 1),
+                                  fontSize: (16 * textScaleFactor),
+                                ),
                               ),
                             ),
                           ),
@@ -136,18 +154,28 @@ class WelcomePage extends StatelessWidget {
                           ),
                           Container(
                             margin: const EdgeInsets.only(top: 15),
-                            child: const Text('¿No tienes una cuenta?'),
+                            child: Text(
+                              '¿No tienes una cuenta?',
+                              style: TextStyle(
+                                color: const Color.fromRGBO(52, 60, 70, 1),
+                                fontSize: (18 * textScaleFactor),
+                              ),
+                            ),
                           ),
                           Container(
                             width: double.infinity,
                             height: 46,
-                            margin: const EdgeInsets.only(
-                                top: 4, left: 15, right: 15),
+                            margin: EdgeInsets.only(
+                                top: totalHeight * 0.018,
+                                left: availableWidth * 0.05,
+                                right: availableWidth * 0.05),
                             child: ElevatedButton(
                               onPressed: () {},
-                              child: const Text(
-                                'Crear una cuenta Tigo Money',
-                              ),
+                              child: Text('Crear una cuenta Tigo Money',
+                                  style: TextStyle(
+                                    //color: const Color.fromRGBO(52, 60, 70, 1),
+                                    fontSize: (16 * textScaleFactor),
+                                  )),
                               style: elevatedButtonStyle,
                             ),
                           ),
