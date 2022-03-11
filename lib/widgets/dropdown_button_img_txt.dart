@@ -129,11 +129,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       });
     } else {
       setState(() {
-        countryList.addAll({
-          Country(name: 'Bolivia', id: '1', image: 'assets/images/bo.png'),
-          Country(name: 'Colombia', id: '2', image: 'assets/images/co.png'),
-          Country(name: 'Guatemala', id: '3', image: 'assets/images/gt.png')
-        });
+        _fillCountryList();
         _selectedCountry = countryList[1];
         _loadCountry();
       });
@@ -144,5 +140,16 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
     final parsedJson = json.decode(responseBody);
     final parsed = parsedJson.cast<Map<String, dynamic>>();
     return parsed.map<Country>((json) => Country.fromJson(json)).toList();
+  }
+
+  void _fillCountryList() {
+    countryList.addAll({
+      Country(name: 'Bolivia', id: '1', image: 'assets/images/bo.png'),
+      Country(name: 'Colombia', id: '2', image: 'assets/images/co.png'),
+      Country(name: 'Guatemala', id: '3', image: 'assets/images/gt.png'),
+      Country(name: 'Honduras', id: '4', image: 'assets/images/hn.png'),
+      Country(name: 'Mexico', id: '5', image: 'assets/images/mx.png'),
+      Country(name: 'Paraguay', id: '6', image: 'assets/images/py.png'),
+    });
   }
 }
