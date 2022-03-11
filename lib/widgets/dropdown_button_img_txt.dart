@@ -17,7 +17,8 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
   void _updateCountry() async {
     SharedPreferences _prefs = await SharedPreferences.getInstance();
     await _prefs.setString('country', _selectedCountry.name);
-    debugPrint(_prefs.getString("country"));
+    var _storedCountry = _prefs.getString('country');
+    debugPrint("New stored country: ${_storedCountry}");
   }
 
   void _loadCountry() async {
@@ -25,10 +26,10 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
       var _country = _prefs.getString("country") ?? "";
       if (_country != "") {
-        Country found =
-            countryList.singleWhere((element) => element.id == '1', orElse: () {
+        Country found = countryList
+            .singleWhere((element) => element.name == _country, orElse: () {
           return Country(
-              name: 'Colombia', id: '2', image: 'assets/image/co.png');
+              name: 'Colombia', id: '2', image: 'assets/images/co.png');
         });
         _selectedCountry = found;
       } else {
