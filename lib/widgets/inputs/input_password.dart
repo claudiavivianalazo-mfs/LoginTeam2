@@ -3,8 +3,9 @@ import 'package:wallet_tigomoney2_0_mobile_login/services/notifications_service.
 
 class InputPassword extends StatefulWidget {
   final String labelText;
+  final bool autoFocusHint;
   final Function? passwordHandler;
-  InputPassword({required this.labelText, this.passwordHandler});
+  InputPassword({required this.labelText, this.autoFocusHint = false, this.passwordHandler});
 
   @override
   State<StatefulWidget> createState() => InputPasswordState(
@@ -30,6 +31,7 @@ class InputPasswordState extends State<InputPassword> {
     return Container(
         width: double.infinity,
         child: TextFormField(
+          autofocus: widget.autoFocusHint,
           onChanged: (text) => setState(() {
             passwordHandler != null ? passwordHandler!(text) : null;
           }),
