@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import '../../widgets/dropdown_button_img_txt.dart';
 import '../widgets/background_tigo.dart';
 import '../widgets/button_styles.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class WelcomePage extends StatelessWidget {
   WelcomePage({Key? key}) : super(key: key);
@@ -18,14 +19,16 @@ class WelcomePage extends StatelessWidget {
             height: SizeConfig.blockSizeVertical * 40,
             decoration: const BoxDecoration(
               image: DecorationImage(
-                fit: BoxFit.fill,
+                fit: BoxFit.cover,
                 image: AssetImage('assets/images/loginBackground.png'),
               ),
             ),
           ),
           //SvgPicture.asset('assets/images/Group_1964.svg', fit: BoxFit.contain),
           Container(
-            margin: const EdgeInsets.symmetric(vertical: 60, horizontal: 40),
+            margin: EdgeInsets.symmetric(
+                vertical: SizeConfig.screenHeight * 0.065,
+                horizontal: SizeConfig.screenWidth * 0.10),
             width: 70,
             height: 70,
             decoration: const BoxDecoration(
@@ -38,13 +41,12 @@ class WelcomePage extends StatelessWidget {
           Container(
             /// Container del card
             margin: const EdgeInsets.fromLTRB(20, 160, 20, 20),
-            width: SizeConfig.blockSizeHorizontal * 100,
+            width: SizeConfig.blockSizeHorizontal * 98,
             height: SizeConfig.blockSizeVertical * 70,
-            // decoration: const BoxDecoration(),
             child: Card(
-              elevation: 3,
+              elevation: 1,
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(10),
+                borderRadius: BorderRadius.circular(20),
               ),
               child: Column(children: <Widget>[
                 Expanded(
@@ -53,8 +55,8 @@ class WelcomePage extends StatelessWidget {
                     decoration: const BoxDecoration(
                       color: Colors.transparent,
                       borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(10),
-                        topRight: Radius.circular(10),
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
                       ),
                     ),
                   ),
@@ -76,7 +78,7 @@ class WelcomePage extends StatelessWidget {
                             height: 46,
                             margin: const EdgeInsets.only(
                                 top: 30, bottom: 10, left: 15, right: 15),
-                            child: TextButton.icon(
+                            child: OutlinedButton.icon(
                               label:
                                   const Text('Iniciar con correo electrónico'),
                               style: textButtonStyle,
@@ -93,9 +95,11 @@ class WelcomePage extends StatelessWidget {
                             height: 46,
                             margin: const EdgeInsets.only(
                                 top: 10, bottom: 10, left: 15, right: 15),
-                            child: TextButton.icon(
+                            child: OutlinedButton.icon(
                               style: textButtonStyle,
-                              onPressed: () => {},
+                              onPressed: () {
+                                Modular.to.pushNamed('/loginPhone');
+                              },
                               icon: const Icon(
                                 Icons.phone_outlined,
                               ),
@@ -155,8 +159,8 @@ class WelcomePage extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            height: 200,
-            margin: const EdgeInsets.fromLTRB(46, 80, 20, 46),
+            height: 220,
+            margin: const EdgeInsets.fromLTRB(20, 60, 4, 40),
             //child: SvgPicture.asset('assets/images/climber.svg'),
             decoration: const BoxDecoration(
               image: DecorationImage(

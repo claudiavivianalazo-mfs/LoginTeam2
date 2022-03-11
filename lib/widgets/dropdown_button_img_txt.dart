@@ -14,19 +14,28 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
       Country(name: "Colombia", id: "2", image: "assets/images/co.png");
   List<Country> countryList = [];
 
+  void _updateCountry() async {
+    SharedPreferences _prefs = await SharedPreferences.getInstance();
+    await _prefs.setString('country', _selectedCountry.name);
+    debugPrint(_prefs.getString("country"));
+  }
+
   void _loadCountry() async {
     try {
       SharedPreferences _prefs = await SharedPreferences.getInstance();
-      await _prefs.setString('country', 'Honduras');
       var _country = _prefs.getString("country") ?? "";
       if (_country != "") {
-        Country _selectedCountry =
-            countryList.firstWhere((country) => country.name == country);
+        Country found =
+            countryList.singleWhere((element) => element.id == '1', orElse: () {
+          return Country(
+              name: 'Colombia', id: '2', image: 'assets/image/co.png');
+        });
+        _selectedCountry = found;
       } else {
-        print(_prefs.getString('country'));
+        await _prefs.setString('country', 'Honduras');
       }
     } catch (e) {
-      print(e);
+      debugPrint(e.toString());
     }
   }
 
@@ -54,7 +63,7 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
                   ),
               child: Text(
                 item.name,
-                style: TextStyle(
+                style: const TextStyle(
                     fontSize: 16,
                     color: Colors.black54,
                     fontWeight: FontWeight.bold),
@@ -96,11 +105,13 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
         child: ButtonTheme(
           alignedDropdown: true,
           child: DropdownButton<Country>(
-            hint: const Text('Seleccione un pais'),
-            items: items3,
-            value: _selectedCountry,
-            onChanged: (newVal) => setState(() => _selectedCountry = newVal!),
-          ),
+              hint: const Text('Seleccione un pais'),
+              items: items3,
+              value: _selectedCountry,
+              onChanged: (newVal) {
+                setState(() => {_selectedCountry = newVal!});
+                _updateCountry();
+              }),
         ),
       ),
     );
@@ -108,15 +119,20 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
 
   void fetchCountries() async {
     var resp = await http.get(Uri.parse(
-        'https://run.mocky.io/v3/72a8fa80-5e0a-44f3-ae14-69bfd0ea2588'));
+        'https://run.mocky.io/v3/37b4cce0-dbdc-48eb-977b-8a67bd72827b'));
     if (resp.statusCode == 200) {
       setState(() {
         countryList = parseCountries(resp.body);
+        debugPrint('${countryList.length} países cargados');
         _selectedCountry = countryList[1];
+        _loadCountry();
       });
-      _loadCountry();
     } else {
-      debugPrint("Service error. Fetching items from local storage");
+      setState(() {
+        _fillCountryList();
+        _selectedCountry = countryList[1];
+        _loadCountry();
+      });
     }
   }
 
@@ -124,5 +140,16 @@ class _DropdownButtonImgTxtState extends State<DropdownButtonImgTxt> {
     final parsedJson = json.decode(responseBody);
     final parsed = parsedJson.cast<Map<String, dynamic>>();
     return parsed.map<Country>((json) => Country.fromJson(json)).toList();
+  }
+
+  void _fillCountryList() {
+    countryList.addAll({
+      Country(name: 'Bolivia', id: '1', image: 'assets/images/bo.png'),
+      Country(name: 'Colombia', id: '2', image: 'assets/images/co.png'),
+      Country(name: 'Guatemala', id: '3', image: 'assets/images/gt.png'),
+      Country(name: 'Honduras', id: '4', image: 'assets/images/hn.png'),
+      Country(name: 'Mexico', id: '5', image: 'assets/images/mx.png'),
+      Country(name: 'Paraguay', id: '6', image: 'assets/images/py.png'),
+    });
   }
 }
