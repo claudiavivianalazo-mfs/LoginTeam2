@@ -105,17 +105,15 @@ class _SigninState extends State<SigninPage> {
                   height: 48,
                   margin: const EdgeInsets.only(top: 20.0),
                   child: ElevatedButton(
-                    child: const Text('Crea una cuenta Tigo Money',
-                        style: TextStyle(color: Color(0xFF363853))),
-                    style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.white),
-                        shape:
-                            MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(15.0),
-                                    side:
-                                        BorderSide(color: Color(0xFF363853))))),
+                    child: const Text('Crea una cuenta Tigo Money', style: TextStyle(color: Color(0xFF363853))),
+                    style: ButtonStyle(backgroundColor: MaterialStateProperty.all<Color>(Colors.white),
+                      shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                        RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                            side: BorderSide(color: Color(0xFF363853))
+                          )
+                        )
+                      ),
                     onPressed: () {},
                   ))
             ])),
